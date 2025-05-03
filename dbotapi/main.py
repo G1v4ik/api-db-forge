@@ -6,11 +6,11 @@ token = pyotp.TOTP('IZXXEZ3FL5ZWKY3SMV2GWZLZL54W633P').now()
 data = {
     "user":{
         "telegram_id": 12341234,
-        "name": "Kirill",
-        "surname": "Kharitonov",
+        "name": "ivan",
+        "surname": "Ivanov",
         "phone": "89999999999",
-        "email": "forge@gmail.com",
-        "berth_day": "2007-05-28",
+        "email": "ivanov@gmail.com",
+        "berth_day": "2000-02-11",
         "mode": "student"
     }
 }

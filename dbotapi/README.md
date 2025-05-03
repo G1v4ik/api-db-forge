@@ -54,4 +54,7 @@ print(requests.post(
     headers={
         "Authorization": f"Forge {str(token)}",
         }).content)
+
+#output: b'{"user": {"telegram_id": 12341234, "name": "ivan", "surname": "Ivanov", "phone": "89999999999", "email": "ivanov@gmail.com", "berth_day": "2000-02-11", "mode": "student"}}'
+
 ```
