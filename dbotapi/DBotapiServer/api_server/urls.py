@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from .views import (
     RegistrationAPIView, 
@@ -13,4 +13,11 @@ urlpatterns = [
     path('users/', RegistrationAPIView.as_view()),
     path('users/update/', UserRetrieveUpdateAPIView.as_view()),
     path('users/login/', LoginAPIView.as_view()),
+    
 ]
+
+urlpatterns_driving_school = [
+    path('driving-school/', include('driving_school.urls')),
+]
+
+urlpatterns += urlpatterns_driving_school

@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'driving_school',
     'api_server',
+    'driving_school',
 ]
 
 AUTH_USER_MODEL = 'api_server.User'

@@ -24,7 +24,6 @@ def is_base32(s):
 
 
 
-
 class MyToken:
 
     def __init__(self):

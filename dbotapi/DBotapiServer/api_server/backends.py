@@ -26,7 +26,7 @@ class TokenAuthentication(authentication.BaseAuthentication):
         try:
             int(token)
     
-            if str(len(token)) > 6:
+            if len(token) > 6:
                 msg = 'Токен должен быт 6-и значным числом'
                 raise exceptions.AuthenticationFailed(msg)
 

@@ -1,6 +1,6 @@
 # api driving school
 
-## register new user
+## register new user for telegram bot
 
 post: url: @/v1.1_beta/users/
 
@@ -24,3 +24,34 @@ post: url: @/v1.1_beta/users/
 - password: 128 < password > 8
 - token: токен типа base32, который вы генерируете сами
 
+
+## register new student
+
+post: @/api/v1.1_beta/driving-school/new/students/
+
+```python
+import pyotp
+import requests
+
+token = pyotp.TOTP('IZXXEZ3FL5ZWKY3SMV2GWZLZL54W633P').now()
+
+data = {
+    "user":{
+        "telegram_id": 12341234,
+        "name": "Kirill",
+        "surname": "Kharitonov",
+        "phone": "89656896036",
+        "email": "forge@gmail.com",
+        "berth_day": "2007-05-28",
+        "mode": "student"
+    }
+}
+
+
+print(requests.post(
+    'http://127.0.0.1:8000/api/v1.1_beta/driving-school/new/students/', 
+    json=data, 
+    headers={
+        "Authorization": f"Forge {str(token)}",
+        }).content)
+```
