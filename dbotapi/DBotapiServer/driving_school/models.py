@@ -1,64 +1,56 @@
 from django.db import models
 
 
-application_status_ru = {
-    "consider": "рассматривается",
-    "accept": "принят"
-}
+active_choices = (
+    (-1, 'Не состоит'),
+    (0, 'рассматривается'),
+    (1, 'действует')
+)
 
 
 class UserBase(models.Model):
     class Meta:
         abstract = True 
 
-    telegram_id = models.IntegerField()
+    telegram_id = models.IntegerField(primary_key=True, unique=True)
     name = models.CharField(max_length=15)
     surname = models.CharField(max_length=30)
     phone = models.CharField(max_length=11)
     email = models.EmailField()
     berth_day = models.DateField()
-    is_active = models.BooleanField(default=True)
-    status = models.CharField(max_length=30, choices=application_status_ru, default=application_status_ru['consider'])
+    is_active = models.IntegerField(choices=active_choices, default=active_choices[1])
 
 
-
-class SchoolCar(models.Model):
-    car_number = models.CharField(max_length=15)
-    car_brand = models.CharField(max_length=20)
-    car_color = models.CharField(max_length=20)
-    description = models.TextField(name='desc')
+class Groups(models.Model):
+    id_group = models.AutoField(primary_key=True, unique=True)
+    telegram_id_student = models.OneToOneField('Student', on_delete=models.PROTECT)
+    id_grouptheory = models.ForeignKey('GroupTheory', on_delete=models.PROTECT)
 
 
 class Driving(models.Model):
-    fk_student = models.ForeignKey('Student', null=True, on_delete=models.PROTECT)
-    fk_teacher = models.ForeignKey('Teacher', null=True, on_delete=models.PROTECT)
-    fk_school_car = models.ForeignKey('SchoolCar', null=True, on_delete=models.PROTECT)
-    fk_status_lesson = models.ForeignKey('StatusLesson', on_delete=models.PROTECT)
+    id_driving = models.AutoField(primary_key=True, unique=True)
+    telegram_id_student = models.ForeignKey('Student', unique=True, null=True, on_delete=models.PROTECT)
+    telegram_id_teacher = models.ForeignKey('Teacher', null=True, on_delete=models.PROTECT)
     datetime_driving = models.DateTimeField()
-    errors = models.IntegerField()
-
-
-class StatusLesson(models.Model):
-    status_name = models.CharField(max_length=30)
+    errors = models.IntegerField(default=-1)
 
 
 class GroupTheory(models.Model):
-    fk_teacher = models.ForeignKey('Teacher', on_delete=models.PROTECT)
-    name_group = models.CharField(max_length=30)
+    id_grouptheory = models.AutoField(primary_key=True, unique=True)
+    telegram_id_teacher = models.ForeignKey('Teacher', on_delete=models.PROTECT, unique=True)
+    name_group = models.CharField(max_length=30, unique=True)
     time_lesson = models.TimeField()
-    theory_studied = models.BooleanField()
+    theory_studied = models.BooleanField(default=False)
     date_exam_theory = models.DateTimeField()
 
 
 class TimeWork(models.Model):
-    time_day = models.TextChoices('am', 'pm')
+    id_timework = models.AutoField(primary_key=True, unique=True)
     work_begin = models.TimeField()
     work_end = models.TimeField()
 
 
 class Student(UserBase):
-    fk_group_lesson = models.ForeignKey('GroupTheory', null=True, on_delete=models.SET_NULL)    
-
     
     @property
     def mode(self):

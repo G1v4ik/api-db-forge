@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api_server',
     'driving_school',
+    'academy'
 ]
 
 AUTH_USER_MODEL = 'api_server.User'

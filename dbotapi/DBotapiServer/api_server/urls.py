@@ -20,4 +20,9 @@ urlpatterns_driving_school = [
     path('driving-school/', include('driving_school.urls')),
 ]
 
+urlpatterns_academy = [
+    path('academy/', include('academy.urls')),
+]
+
 urlpatterns += urlpatterns_driving_school
+urlpatterns += urlpatterns_academy
