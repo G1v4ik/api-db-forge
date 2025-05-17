@@ -5,9 +5,6 @@ import random
 
 token = pyotp.TOTP('IZXXEZ3FL5ZWKY3SMV2GWZLZL54W633P').now()
 
-
-
-
 data_newuser = {
     "user":{
         "telegram_id": random.randint(100_000, 999_999),
@@ -223,7 +220,7 @@ json_new_educationalmaterials_academy = {
     }
 }
 
-testapi = TestAPI(url=f'{academy_api_utl}students/', 
+testapi = TestAPI(url=f'{academy_api_utl}educationalmaterials/', 
                   json_data=json_new_student_academy)
 
 # testapi.new_user()
