@@ -17,7 +17,7 @@ __URL:__ <http://example.com/students> (POST)
 ```json
 {
     "data":{
-        "telegram_id": telegram_id: integer,
+        "telegram_id": 111111, //telegram_id
         "name": "student_name",
         "surname": "student_surname",
         "email": "student@gmail.com"
@@ -44,7 +44,7 @@ __URL:__ <http://example.com/certificates> (POST)
 ```json
 {
     "data": {
-        "id_student": 11111 (student telegram_id),
+        "id_student": 11111,//(student telegram_id)
         "url": "http://blogshistory.ru",
         "id_courses": 1
     }
